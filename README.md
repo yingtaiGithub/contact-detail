@@ -1,9 +1,9 @@
 # memorial
 
 1. sudo apt-get install libevent-dev python-dev python3-dev python-pip  build-essential 
-2. git clone https://github.com/ovntatar/memorial.git
+2. git clone https://github.com/alexpGithub/contact-detail
 3. cd memorial
-4. mkvirtualenv --python=/usr/bin/python3.5 memorial
+4. mkvirtualenv --python=/usr/bin/python3.5 contact-detail
 5. cd etc
 6. mkdir die logs # if does'n exists
 7. pip install -r requirements.txt
