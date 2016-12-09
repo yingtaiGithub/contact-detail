@@ -249,7 +249,7 @@ class ThirdSpider(MySpider):
     def parse_contactPage(self, response):
         item = DynamicItem(url=response.url)
         item['article_name'] = response.meta['articleName']
-        item['contact_center'] = response.meta['shop']
+        item['shop_name'] = response.meta['shop']
         raw_contactDetail = " ".join(response.xpath("body//*[contains(text(), 'mpressum') and not(self::script) and not(self::a)]/../descendant-or-self::text()|body//*[contains(text(), 'MPRESSUM') and not(self::script) and not(self::script)]/../descendant-or-self::text()").extract())
         item['contact_detail'] = re.sub('[a-z]mpressum', '', raw_contactDetail, flags=re.IGNORECASE)
 

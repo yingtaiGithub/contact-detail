@@ -15,7 +15,7 @@ class MainCrawler(object):
     def __init__(self, articleName, *client_ids, max_items=None):  # client_ids - range or integer
         self.runner = CrawlerRunner(get_project_settings())
         if not client_ids:
-            self.client_ids = range(1, 4)
+            self.client_ids = range(3, 4)
         elif client_ids and type(client_ids[0]) == int:
             self.client_ids = client_ids
         elif type(client_ids[0]) != int:
