@@ -1,6 +1,6 @@
-2016-12-09 09:46:03 INFO: Enabled extensions:
-['scrapy.extensions.logstats.LogStats', 'scrapy.extensions.corestats.CoreStats']
-2016-12-09 09:46:03 INFO: Enabled downloader middlewares:
+2016-12-09 17:10:53 INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats', 'scrapy.extensions.logstats.LogStats']
+2016-12-09 17:10:53 INFO: Enabled downloader middlewares:
 ['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
  'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
  'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
@@ -12,133 +12,85 @@
  'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
  'scrapy.downloadermiddlewares.chunked.ChunkedTransferMiddleware',
  'scrapy.downloadermiddlewares.stats.DownloaderStats']
-2016-12-09 09:46:03 INFO: Enabled spider middlewares:
+2016-12-09 17:10:53 INFO: Enabled spider middlewares:
 ['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
  'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
  'scrapy.spidermiddlewares.referer.RefererMiddleware',
  'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
  'scrapy.spidermiddlewares.depth.DepthMiddleware']
-2016-12-09 09:46:03 INFO: Enabled item pipelines:
+2016-12-09 17:10:53 INFO: Enabled item pipelines:
 ['scrapy_app.pipelines.Format', 'scrapy_app.pipelines.MongoDb']
-2016-12-09 09:46:03 INFO: Spider opened
-2016-12-09 09:46:04 INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
-2016-12-09 09:46:04 INFO: ladenzeile
-2016-12-09 09:46:04 INFO: http://www.ladenzeile.de/suche?q=shuhe
-2016-12-09 09:46:06 INFO: PARSING LIST . http://www.ladenzeile.de/schuhe/
-2016-12-09 09:46:09 INFO: shopPage
-2016-12-09 09:46:09 INFO: http://www.mandmdirect.de
-2016-12-09 09:46:09 INFO: http://www.mandmdirect.de/02/stp/impressum
-2016-12-09 09:46:10 INFO: shopPage
-2016-12-09 09:46:10 INFO: http://www.sarenza.de
-2016-12-09 09:46:10 INFO: http://www.sarenza.de/Impressum
-2016-12-09 09:46:10 INFO: shopPage
-2016-12-09 09:46:10 INFO: http://www.aboutyou.de
-2016-12-09 09:46:10 INFO: http://www.aboutyou.de/impressum
-2016-12-09 09:46:11 INFO: shopPage
-2016-12-09 09:46:11 INFO: http://www.schuh-bamberg.de/de_en/
-2016-12-09 09:46:11 ERROR: list index out of range
-2016-12-09 09:46:11 INFO: shopPage
-2016-12-09 09:46:11 INFO: http://www.shoepassion.de
-2016-12-09 09:46:11 INFO: http://www.shoepassion.de/impressum/
-2016-12-09 09:46:11 INFO: shopPage
-2016-12-09 09:46:11 INFO: http://www.schuhhaus-strauch.de
-2016-12-09 09:46:11 INFO: http://www.schuhhaus-strauch.de/epages/strauch.sf/?ObjectPath=/Shops/Strauch/Categories/Imprint
-2016-12-09 09:46:13 INFO: shopPage
-2016-12-09 09:46:13 INFO: http://www.herrenausstatter.de
-2016-12-09 09:46:13 INFO: http://www.herrenausstatter.de/blogs/agb/category/anbieterkennzeichung/
-2016-12-09 09:46:13 INFO: shopPage
-2016-12-09 09:46:13 INFO: https://www.clarks.de/
-2016-12-09 09:46:13 ERROR: list index out of range
-2016-12-09 09:46:13 INFO: shopPage
-2016-12-09 09:46:13 INFO: http://www.just4men.de
-2016-12-09 09:46:13 INFO: http://www.just4men.de/blogs/agb/category/anbieterkennzeichnung/
-2016-12-09 09:46:13 INFO: shopPage
-2016-12-09 09:46:13 INFO: https://www.zalando.de/
-2016-12-09 09:46:13 INFO: https://www.zalando.de/zalando-impressum/
-2016-12-09 09:46:13 INFO: shopPage
-2016-12-09 09:46:13 INFO: https://www.lodenfrey.com/
-2016-12-09 09:46:13 INFO: https://www.lodenfrey.com/Impressum/
-2016-12-09 09:46:14 INFO: shopPage
-2016-12-09 09:46:14 INFO: https://www.vaola.de/
-2016-12-09 09:46:14 INFO: https://www.vaola.de/impressum/
-2016-12-09 09:46:16 INFO: shopPage
-2016-12-09 09:46:16 INFO: https://www.amazon.de/
-2016-12-09 09:46:16 INFO: https://www.amazon.de/b/ref=footer_nav_legal?ie=UTF8&node=505050
-2016-12-09 09:46:16 INFO: shopPage
-2016-12-09 09:46:16 INFO: http://shoes4friends.de/
-2016-12-09 09:46:16 INFO: http://shoes4friends.de/impressum/
-2016-12-09 09:46:17 INFO: shopPage
-2016-12-09 09:46:17 INFO: https://www.tausendkind.de/
-2016-12-09 09:46:17 INFO: https://www.tausendkind.de/impressum
-2016-12-09 09:46:18 INFO: shopPage
-2016-12-09 09:46:18 INFO: https://www.deerberg.de/de/
-2016-12-09 09:46:18 INFO: https://www.deerberg.de/de/support/static/content/informationen/impressum/web
-2016-12-09 09:46:18 INFO: shopPage
-2016-12-09 09:46:18 INFO: http://www.emilialay.de
-2016-12-09 09:46:18 INFO: http://www.emilialay.de/impressum?cartid=572608651525728765087202
-2016-12-09 09:46:18 INFO: shopPage
-2016-12-09 09:46:18 INFO: http://www.peterhahn.de
-2016-12-09 09:46:18 INFO: http://www.peterhahn.de/impressum?cartid=572608996778733202919210
-2016-12-09 09:46:21 INFO: shopPage
-2016-12-09 09:46:21 INFO: http://www.stylefile.de
-2016-12-09 09:46:21 INFO: http://www.stylefile.de/texte/impressum.html
-2016-12-09 09:46:21 INFO: shopPage
-2016-12-09 09:46:21 INFO: http://www.crocs.de
-2016-12-09 09:46:21 ERROR: list index out of range
-2016-12-09 09:46:22 INFO: shopPage
-2016-12-09 09:46:22 INFO: https://www.breuninger.com/
-2016-12-09 09:46:22 INFO: https://www.breuninger.com/service/impressum.cmd
-2016-12-09 09:46:22 INFO: shopPage
-2016-12-09 09:46:22 INFO: https://www.budapester.com/
-2016-12-09 09:46:22 INFO: https://www.budapester.com/impressum
-2016-12-09 09:46:22 INFO: shopPage
-2016-12-09 09:46:22 INFO: https://www.otto.de/
-2016-12-09 09:46:22 INFO: https://www.otto.de/shoppages/service/impressum
-2016-12-09 09:46:23 INFO: shopPage
-2016-12-09 09:46:23 INFO: http://www.bonprix.de
-2016-12-09 09:46:24 ERROR: list index out of range
-2016-12-09 09:46:25 INFO: shopPage
-2016-12-09 09:46:25 INFO: https://www.puls-x.de/
-2016-12-09 09:46:25 INFO: https://www.puls-x.de/impressum
-2016-12-09 09:46:26 INFO: shopPage
-2016-12-09 09:46:26 INFO: https://www.bergzeit.de/
-2016-12-09 09:46:26 INFO: https://www.bergzeit.de/impressum/
-2016-12-09 09:46:26 INFO: shopPage
-2016-12-09 09:46:26 INFO: https://www.afew-store.com/
-2016-12-09 09:46:26 INFO: https://www.afew-store.com/de/impressum/
-2016-12-09 09:46:27 INFO: shopPage
-2016-12-09 09:46:27 INFO: https://www.baur.de/
-2016-12-09 09:46:27 ERROR: list index out of range
-2016-12-09 09:46:27 INFO: shopPage
-2016-12-09 09:46:27 INFO: https://www.warehouse-one.de/
-2016-12-09 09:46:27 ERROR: list index out of range
-2016-12-09 09:46:28 INFO: Closing spider (finished)
-2016-12-09 09:46:28 INFO: Dumping Scrapy stats:
-{'downloader/exception_count': 1,
- 'downloader/exception_type_count/twisted.web._newclient.ResponseNeverReceived': 1,
- 'downloader/request_bytes': 66826,
- 'downloader/request_count': 146,
- 'downloader/request_method_count/GET': 77,
- 'downloader/request_method_count/POST': 69,
- 'downloader/response_bytes': 1544890,
- 'downloader/response_count': 145,
- 'downloader/response_status_count/200': 121,
- 'downloader/response_status_count/301': 18,
- 'downloader/response_status_count/302': 3,
- 'downloader/response_status_count/307': 1,
- 'downloader/response_status_count/400': 1,
- 'downloader/response_status_count/429': 1,
- 'dupefilter/filtered': 37,
- 'finish_reason': 'finished',
- 'finish_time': datetime.datetime(2016, 12, 9, 7, 46, 28, 139393),
- 'item_scraped_count': 23,
- 'log_count/ERROR': 6,
- 'log_count/INFO': 91,
- 'request_depth_max': 3,
- 'response_received_count': 123,
- 'scheduler/dequeued': 146,
- 'scheduler/dequeued/memory': 146,
- 'scheduler/enqueued': 146,
- 'scheduler/enqueued/memory': 146,
- 'start_time': datetime.datetime(2016, 12, 9, 7, 46, 4, 2632)}
-2016-12-09 09:46:28 INFO: Spider closed (finished)
+2016-12-09 17:10:53 INFO: Spider opened
+2016-12-09 17:10:53 INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2016-12-09 17:10:53 INFO: ladenzeile
+2016-12-09 17:10:53 INFO: http://www.ladenzeile.de/suche?q=shuhe
+2016-12-09 17:10:55 INFO: PARSING LIST . http://www.ladenzeile.de/schuhe/
+2016-12-09 17:10:59 INFO: shopPage
+2016-12-09 17:10:59 INFO: http://www.mandmdirect.de
+2016-12-09 17:10:59 INFO: http://www.mandmdirect.de/02/stp/impressum
+2016-12-09 17:10:59 INFO: shopPage
+2016-12-09 17:10:59 INFO: http://www.sarenza.de
+2016-12-09 17:10:59 INFO: http://www.sarenza.de/Impressum
+2016-12-09 17:10:59 INFO: shopPage
+2016-12-09 17:10:59 INFO: http://www.aboutyou.de
+2016-12-09 17:10:59 INFO: http://www.aboutyou.de/impressum
+2016-12-09 17:11:00 INFO: shopPage
+2016-12-09 17:11:00 INFO: http://www.schuh-bamberg.de/de_de/
+2016-12-09 17:11:00 INFO: http://www.schuh-bamberg.de/de_de/impressum/
+2016-12-09 17:11:02 INFO: shopPage
+2016-12-09 17:11:02 INFO: http://www.herrenausstatter.de
+2016-12-09 17:11:02 INFO: http://www.herrenausstatter.de/blogs/agb/category/anbieterkennzeichung/
+2016-12-09 17:11:02 INFO: shopPage
+2016-12-09 17:11:02 INFO: http://www.just4men.de
+2016-12-09 17:11:02 INFO: http://www.just4men.de/blogs/agb/category/anbieterkennzeichnung/
+2016-12-09 17:11:02 INFO: body//*[contains(text(), '75002')]/../descendant-or-self::text()
+2016-12-09 17:11:02 INFO: [<Selector xpath="body//*[contains(text(), '75002')]" data='<p>27-29 rue de Choiseul, 75002 Paris</p'>]
+2016-12-09 17:11:02 INFO: shopPage
+2016-12-09 17:11:02 INFO: https://www.vaola.de/
+2016-12-09 17:11:02 INFO: https://www.vaola.de/impressum/
+2016-12-09 17:11:02 INFO: shopPage
+2016-12-09 17:11:02 INFO: https://www.clarks.de/
+2016-12-09 17:11:02 ERROR: list index out of range
+2016-12-09 17:11:03 INFO: body//*[contains(text(), '96052')]/../descendant-or-self::text()
+2016-12-09 17:11:03 INFO: [<Selector xpath="body//*[contains(text(), '96052')]" data='<span>96052 Bamberg<br></span>'>]
+2016-12-09 17:11:03 INFO: shopPage
+2016-12-09 17:11:03 INFO: https://www.lodenfrey.com/
+2016-12-09 17:11:03 INFO: https://www.lodenfrey.com/Impressum/
+2016-12-09 17:11:03 INFO: body//*[contains(text(), '20095')]/../descendant-or-self::text()
+2016-12-09 17:11:03 INFO: []
+2016-12-09 17:11:05 INFO: shopPage
+2016-12-09 17:11:05 INFO: https://www.breuninger.com/
+2016-12-09 17:11:05 INFO: https://www.breuninger.com/service/impressum.cmd
+2016-12-09 17:11:05 INFO: shopPage
+2016-12-09 17:11:05 INFO: https://www.amazon.de/
+2016-12-09 17:11:05 ERROR: list index out of range
+2016-12-09 17:11:05 INFO: shopPage
+2016-12-09 17:11:05 INFO: https://www.deerberg.de/de/
+2016-12-09 17:11:05 INFO: https://www.deerberg.de/de/support/static/content/informationen/impressum/web
+2016-12-09 17:11:06 INFO: body//*[contains(text(), '13355')]/../descendant-or-self::text()
+2016-12-09 17:11:06 INFO: [<Selector xpath="body//*[contains(text(), '13355')]" data='<script type="application/ld+json">\n {\n '>]
+2016-12-09 17:11:06 INFO: shopPage
+2016-12-09 17:11:06 INFO: https://www.zalando.de/
+2016-12-09 17:11:06 INFO: https://www.zalando.de/zalando-impressum/
+2016-12-09 17:11:07 INFO: shopPage
+2016-12-09 17:11:07 INFO: https://www.tausendkind.de/
+2016-12-09 17:11:07 INFO: https://www.tausendkind.de/impressum
+2016-12-09 17:11:07 INFO: body//*[contains(text(), '80333')]/../descendant-or-self::text()
+2016-12-09 17:11:07 INFO: []
+2016-12-09 17:11:07 INFO: body//*[contains(text(), '70173')]/../descendant-or-self::text()
+2016-12-09 17:11:07 INFO: []
+2016-12-09 17:11:07 INFO: body//*[contains(text(), '85748')]/../descendant-or-self::text()
+2016-12-09 17:11:07 INFO: []
+2016-12-09 17:11:07 INFO: body//*[contains(text(), '29582')]/../descendant-or-self::text()
+2016-12-09 17:11:07 INFO: []
+2016-12-09 17:11:07 INFO: body//*[contains(text(), '80807')]/../descendant-or-self::text()
+2016-12-09 17:11:07 INFO: []
+2016-12-09 17:11:08 INFO: body//*[contains(text(), '85748')]/../descendant-or-self::text()
+2016-12-09 17:11:08 INFO: []
+2016-12-09 17:11:08 INFO: body//*[contains(text(), '81925')]/../descendant-or-self::text()
+2016-12-09 17:11:08 INFO: []
+2016-12-09 17:11:08 INFO: shopPage
+2016-12-09 17:11:08 INFO: https://www.bergzeit.de/
+2016-12-09 17:11:08 INFO: https://www.bergzeit.de/impressum/
+2016-12-09 17:11:08 INFO: body//*[contains(text(), '10243')]/../descendant-or-self::text()
+2016-12-09 17:11:08 INFO: []

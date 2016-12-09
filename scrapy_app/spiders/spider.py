@@ -185,6 +185,17 @@ class SecondSpider(MySpider):
         return item
 
 
+PHONE_SEP = "[\-. ()+]"
+
+sep_re = re.compile(PHONE_SEP)
+# de_localphone_format = '\(?0800\)?' + PHONE_SEP + '\d{2,3}' + PHONE_SEP +  '\d{2,3}' + PHONE_SEP + '\d{2,3}'
+de_localphone_format = '\(?0800\)?[0-9\- ()+/]{10,}'
+de_interphone_format = '\+?0*49[0-9\- ()+/]{10,}'
+de_phone_format = de_localphone_format + "|" + de_interphone_format
+de_phone_regex = re.compile(de_phone_format)
+
+email_regex = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.de")
+
 class ThirdSpider(MySpider):
     name = "ladenzeile"
     id = 3
@@ -247,10 +258,26 @@ class ThirdSpider(MySpider):
             logging.error(ex)
 
     def parse_contactPage(self, response):
+        with open('a.txt', 'w') as f:
+            f.write(str(response.body))
+
         item = DynamicItem(url=response.url)
+
         item['article_name'] = response.meta['articleName']
         item['shop_name'] = response.meta['shop']
-        raw_contactDetail = " ".join(response.xpath("body//*[contains(text(), 'mpressum') and not(self::script) and not(self::a)]/../descendant-or-self::text()|body//*[contains(text(), 'MPRESSUM') and not(self::script) and not(self::script)]/../descendant-or-self::text()").extract())
-        item['contact_detail'] = re.sub('[a-z]mpressum', '', raw_contactDetail, flags=re.IGNORECASE)
+        item['Telephone'] = '; '.join(set([phone.strip("(") for phone in de_phone_regex.findall(str(response.body))]))
+        item['Email'] = '; '.join(set(email_regex.findall(str(response.body))))
+
+        postal_numbers = list(set(re.findall('\D(\d{5})\s[A-Z]',str(response.body))))
+        item['postalNumbers'] = str(postal_numbers)
+        addresses = []
+        for postal_number in postal_numbers:
+            address_xpath = "body//p[contains(text(), '{}') and self::td ]/text()".format(postal_number)
+            address = '; '.join(response.xpath(address_xpath).extract())
+            addresses.append(address)
+        item['Address'] = '; '.join(addresses)
+
+        # raw_contactDetail = " ".join(response.xpath("body//*[contains(text(), 'mpressum') and not(self::script) and not(self::a)]/../descendant-or-self::text()|body//*[contains(text(), 'MPRESSUM') and not(self::script) and not(self::script)]/../descendant-or-self::text()").extract())
+        # item['contact_detail'] = re.sub('[a-z]mpressum', '', raw_contactDetail, flags=re.IGNORECASE)
 
         return item
