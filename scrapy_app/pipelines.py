@@ -20,8 +20,8 @@ class MongoDb(object):
         self.client = MongoClient(MONGODB_SERVER, MONGODB_PORT)
 
     def process_item(self, item, spider):
-        # collection = self.client['contactDetail'][spider.name]
-        # collection.update({'shop_name': item['shop_name']}, item, upsert=True)
+        collection = self.client['contactDetail'][spider.name]
+        collection.update({'shop_name': item['shop_name']}, item, upsert=True)
         # collection.insert_one(item)
 
         return item

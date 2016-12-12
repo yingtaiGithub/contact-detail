@@ -8,7 +8,6 @@ ARTICLES_CSV = path.join(PROJECT_DIR, 'Article-list.csv')
 MONGODB_SERVER = "localhost"
 MONGODB_PORT = 27017
 
-
 ITEM_PIPELINES = {
     'scrapy_app.pipelines.Format': 200,
     'scrapy_app.pipelines.MongoDb': 900,

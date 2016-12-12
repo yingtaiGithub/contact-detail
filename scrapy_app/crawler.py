@@ -12,15 +12,14 @@ configure_logging()
 
 # main class of the scraping project. "run_crawler" method for scraping sites from "client_ids" parameter.
 class MainCrawler(object):
-    def __init__(self, articleName, *client_ids, max_items=None):  # client_ids - range or integer
+    def __init__(self,  *client_ids, max_items=None):  # client_ids - range or integer
         self.runner = CrawlerRunner(get_project_settings())
         if not client_ids:
-            self.client_ids = range(3, 4)
+            self.client_ids = range(1, 4)
         elif client_ids and type(client_ids[0]) == int:
             self.client_ids = client_ids
         elif type(client_ids[0]) != int:
             self.client_ids = client_ids[0]
-        self.articleName = articleName
         self.max_items = max_items
         self.spiders = {spider.id: spider for spider in [FirstSpider, SecondSpider, ThirdSpider]}
         self.spider = None
@@ -45,6 +44,6 @@ class MainCrawler(object):
             self.spider = self.spiders[client_id]
             self.spider.custom_settings = {}
             if self.max_items: self.spider.custom_settings['CLOSESPIDER_ITEMCOUNT'] = self.max_items
-            yield self.runner.crawl(self.spider, self.articleName, settings=json_settings)
+            yield self.runner.crawl(self.spider, settings=json_settings)
         reactor.stop()
 
