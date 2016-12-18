@@ -49,8 +49,9 @@ def extract_with_xpath(parent, css_list):
 class MySpider(Spider):
     def __init__(self, **kwargs):
         super(MySpider, self).__init__(**kwargs)
-        self.articleNames = get_articleNames()
+        # self.articleNames = get_articleNames()
         # self.articleNames = [' Porcelain brillant 160 В°C Kanariengelb Gl.20 ml', ' Porcelain brillant 160 В°C Signalgelb Gl. 20 ml', 'Medi Stoffmalst. Gelb']
+        self.articleNames = ['Abus Bordo 6000/75 Faltschloss inkl. Transporttasche']
 
 class FirstSpider(MySpider):
     name = "amazon"
@@ -130,7 +131,6 @@ class FirstSpider(MySpider):
         item['Telephone'] = '; '.join(set([''.join(phone).strip().rstrip("(") for phone in de_phone_regex.findall(contact_detail)]))
         item['Email'] = '; '.join(set([email.strip() for email in email_regex.findall(contact_detail)]))
 
-
         postal_numbers = list(set(re.findall('[\s-](\d{5})\s[A-Z]', contact_detail)))
         # item['postalNumbers'] = str(postal_numbers)
         addresses = []
@@ -170,8 +170,6 @@ class SecondSpider(MySpider):
                 yield FormRequest(url, callback=self.parse_list, formdata=data, meta=meta)
             else:
                 logging.info('CONTINUE')
-
-
 
     def parse_list(self, response):
         self.current_url = response.url
@@ -250,25 +248,38 @@ class ThirdSpider(MySpider):
         logging.info('PARSING LIST . {}'.format(response.url))
         container = response.css('body')
 
-        shop_ids = [x.split(';')[0].split('(')[-1].split(',') for x in extract_with_xpath(container, [".item-info", "onclick"])]
-        # logging.info(shop_ids)
-        for shop_id in shop_ids:
-        # shop_id = shop_ids[2]
-            url = "http://www.ladenzeile.de/controller/cpac"
-            data = {'i':shop_id[0], 'ts':shop_id[1]}
-            yield FormRequest(url, callback=self.parse_json, formdata=data, meta=meta)
+        with open('a.txt', 'wb') as f:
+            f.write(response.body)
 
-    def parse_json(self, response):
-        logging.info('PARSING JSON . {}'.format(response.url))
-        meta = response.meta
-        json_data = json.loads(response.body_as_unicode().replace('&&&VMBLABLA&&&', ''))
-        # logging.info(json_data)
-        shop_domain = json_data['shop']
-        meta['shop'] = shop_domain.split('.')[0]
-        url = ("http://www." + shop_domain).lower()
-        # logging.info(url)
+        # shop_ids = [x.split(';')[0].split('(')[-1].split(',') for x in extract_with_xpath(container, [".item-info", "onclick"])]
+        # # logging.info(shop_ids)
+        # for shop_id in shop_ids:
+        # # shop_id = shop_ids[2]
+        #     url = "http://www.ladenzeile.de/controller/cpac"
+        #     data = {'i':shop_id[0], 'ts':shop_id[1]}
+        #     yield FormRequest(url, callback=self.parse_json, formdata=data, meta=meta)
 
-        yield Request(url, callback=self.parse_shopPage, meta=meta)
+        shop_domains = filter(None, [''.join(x.split()) for x in extract_with_xpath(container, [".shop-name", 'text'])])
+        for shop_domain in shop_domains:
+            if "." not in shop_domain:
+                shop_domain = shop_domain + '.de'
+
+            meta['shop'] = shop_domain.split('.')[0]
+            url = ("http://www." + shop_domain).lower()
+            logging.info(url)
+            yield Request(url, callback=self.parse_shopPage, meta=meta)
+
+    # def parse_json(self, response):
+    #     logging.info('PARSING JSON . {}'.format(response.url))
+    #     meta = response.meta
+    #     json_data = json.loads(response.body_as_unicode().replace('&&&VMBLABLA&&&', ''))
+    #     logging.info(json_data)
+    #     shop_domain = json_data['shop']
+    #     meta['shop'] = shop_domain.split('.')[0]
+    #     url = ("http://www." + shop_domain).lower()
+    #     # logging.info(url)
+    #
+    #     yield Request(url, callback=self.parse_shopPage, meta=meta)
 
     def parse_shopPage(self, response):
         logging.info('PARSING SHOP PAGE . {}'.format(response.url))

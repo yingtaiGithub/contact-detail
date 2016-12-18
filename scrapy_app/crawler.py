@@ -7,6 +7,7 @@ from pydispatch import dispatcher
 from scrapy_app.spiders.spider import FirstSpider, SecondSpider, ThirdSpider
 
 from scrapy_app.log import configure_logging
+
 configure_logging()
 
 
