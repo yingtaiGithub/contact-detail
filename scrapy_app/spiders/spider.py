@@ -49,9 +49,9 @@ def extract_with_xpath(parent, css_list):
 class MySpider(Spider):
     def __init__(self, **kwargs):
         super(MySpider, self).__init__(**kwargs)
-        # self.articleNames = get_articleNames()
+        self.articleNames = get_articleNames()
         # self.articleNames = [' Porcelain brillant 160 В°C Kanariengelb Gl.20 ml', ' Porcelain brillant 160 В°C Signalgelb Gl. 20 ml', 'Medi Stoffmalst. Gelb']
-        self.articleNames = ['Abus Bordo 6000/75 Faltschloss inkl. Transporttasche']
+        # self.articleNames = ['Abus Bordo 6000/75 Faltschloss inkl. Transporttasche']
 
 class FirstSpider(MySpider):
     name = "amazon"
