@@ -121,7 +121,7 @@ class FirstSpider(MySpider):
             # logging.info(ex)
 
     def parse_contactPage(self, response):
-        logging.info('PARSING LIST CONTACT PAGE. {}'.format(response.url))
+        logging.info('PARSING CONTACT PAGE. {}'.format(response.url))
         logging.info(response.url)
         item = DynamicItem(url=response.url)
         item['article_name'] = response.meta['articleName']

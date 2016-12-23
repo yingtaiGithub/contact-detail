@@ -22,8 +22,8 @@ class MongoDb(object):
     def process_item(self, item, spider):
         if len(item['Telephone']) > 2 or len(item['Email']) > 2:
             collection = self.client['contactDetail'][spider.name]
-            collection.update({'shop_name': item['shop_name']}, item, upsert=True)
-            # collection.insert_one(item)
+            # collection.update({'shop_name': item['shop_name']}, item, upsert=True)
+            collection.insert_one(item)
 
             return item
 
