@@ -4,7 +4,7 @@ from scrapy.utils.project import get_project_settings
 from twisted.internet import reactor, defer
 from pydispatch import dispatcher
 
-from scrapy_app.spiders.spider import FirstSpider, SecondSpider, ThirdSpider
+from scrapy_app.spiders.spider import FirstSpider, SecondSpider, ThirdSpider, FourthSpider
 
 from scrapy_app.log import configure_logging
 
@@ -16,13 +16,13 @@ class MainCrawler(object):
     def __init__(self,  *client_ids, max_items=None):  # client_ids - range or integer
         self.runner = CrawlerRunner(get_project_settings())
         if not client_ids:
-            self.client_ids = range(1, 4)
+            self.client_ids = range(1, 5)
         elif client_ids and type(client_ids[0]) == int:
             self.client_ids = client_ids
         elif type(client_ids[0]) != int:
             self.client_ids = client_ids[0]
         self.max_items = max_items
-        self.spiders = {spider.id: spider for spider in [FirstSpider, SecondSpider, ThirdSpider]}
+        self.spiders = {spider.id: spider for spider in [FirstSpider, SecondSpider, ThirdSpider, FourthSpider]}
         self.spider = None
         self.ITEMS = []
         dispatcher.connect(receiver=self.add_item, signal=signals.item_scraped)

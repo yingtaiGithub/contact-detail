@@ -49,9 +49,9 @@ def extract_with_xpath(parent, css_list):
 class MySpider(Spider):
     def __init__(self, **kwargs):
         super(MySpider, self).__init__(**kwargs)
-        self.articleNames = get_articleNames()
+        # self.articleNames = get_articleNames()
         # self.articleNames = [' Porcelain brillant 160 В°C Kanariengelb Gl.20 ml', ' Porcelain brillant 160 В°C Signalgelb Gl. 20 ml', 'Medi Stoffmalst. Gelb']
-        # self.articleNames = ['Abus Bordo 6000/75 Faltschloss inkl. Transporttasche']
+        self.articleNames = ['Abus Bordo 6000/75 Faltschloss inkl. Transporttasche']
 
 class FirstSpider(MySpider):
     name = "amazon"
@@ -96,7 +96,6 @@ class FirstSpider(MySpider):
             logging.info(ex)
 
     def parse_list_2(self, response):
-
         self.current_url = response.url
         meta = response.meta
         logging.info('PARSING LIST TWO. {}'.format(response.url))
@@ -146,6 +145,75 @@ class FirstSpider(MySpider):
         # item['contact_detail'] = contact_detail
         return item
 
+class FourthSpider(FirstSpider):
+    name = "amazon-industry"
+    id = 4
+
+    def start_requests(self):
+        template_url = "https://www.amazon.de/s/ref=lp_6587747031_ex_n_1?rh=n%3A5866098031&bbn=5866098031&ie=UTF8&qid=1483967386"
+        yield Request(template_url, callback=self.search_category)
+
+    def search_category(self, response):
+        category_tags = response.xpath('//div[@class="categoryRefinementsSection"]//a')
+        logging.info(len(category_tags))
+        for category_tag in category_tags:
+            category_name = category_tag.xpath('./span//text()').extract()[0]
+            category_link = category_tag.xpath('./@href').extract()[0]
+            url = urljoin(response.url, category_link)
+
+            # logging.info(category_name)
+            # logging.info(url)
+            yield Request(url, meta={'category':category_name}, callback=self.parse_list_1)
+
+    def parse_list_1(self, response):
+        self.current_url = response.url
+        meta = response.meta
+        logging.info('PARSING LIST ONE. {}'.format(response.url))
+
+        container = response.css('#search-results')
+
+        urls = container.xpath("//*[contains(text(), 'neu')]/@href").extract()
+        # logging.info(urls)
+        # logging.info(len(urls))
+
+        for url in urls:
+            # url = urls[1]
+            yield Request(url, meta=meta, callback=self.parse_list_2)
+
+        try:
+            css_list = ["#pagnNextLink", "href"]
+            next_link = extract_with_xpath(response, css_list)[0]
+            logging.info('NEXT-LINK')
+            yield Request(urljoin(self.current_url, next_link), callback=self.parse_list_1, meta=meta)
+        except Exception as ex:
+            logging.info(ex)
+
+    def parse_contactPage(self, response):
+        logging.info('PARSING CONTACT PAGE. {}'.format(response.url))
+        logging.info(response.url)
+        item = DynamicItem(url=response.url)
+        item['category'] = response.meta['category']
+        item['shop_name'] = response.xpath('//title/text()').extract()[0]
+        contact_detail = " ".join(extract_with_xpath(response, ["#aag_detailsAbout", "text_descendant"]))
+        contact_detail = ' '.join(contact_detail.split()).strip().replace(',', '')
+        item['Telephone'] = '; '.join(
+            set([''.join(phone).strip().rstrip("(") for phone in de_phone_regex.findall(contact_detail)]))
+        item['Email'] = '; '.join(set([email.strip() for email in email_regex.findall(contact_detail)]))
+
+        postal_numbers = list(set(re.findall('[\s-](\d{5})\s[A-Z]', contact_detail)))
+        # item['postalNumbers'] = str(postal_numbers)
+        addresses = []
+        for postal_number in postal_numbers:
+            address_format = ("\S+\s\S+\s\S+\s{}\s\S+").format(postal_number)
+            address_regex = re.compile(address_format)
+            try:
+                address = address_regex.search(contact_detail).group()
+            except:
+                address = ''
+            addresses.append(address)
+        item['Address'] = '; '.join(addresses)
+        # item['contact_detail'] = contact_detail
+        return item
 
 class SecondSpider(MySpider):
     name = "rakuten"
@@ -180,6 +248,8 @@ class SecondSpider(MySpider):
         urls = [re.search('http.+?"', part).group().replace("\\", '').strip('"') for part in parts if
                 'product-link' in part]
 
+        logging.info(len(urls))
+
         for url in urls:
             yield Request(url, callback=self.parse_productPage, meta=meta)
 
@@ -201,14 +271,15 @@ class SecondSpider(MySpider):
 
         try:
             contact_link = response.xpath("//*[contains(text(), 'Kundeninformation')]/@href").extract()[0]
+            logging.info('CONTACT LINK {}'.format(contact_link))
             yield Request(contact_link, callback=self.parse_contactPage, meta=meta)
         except Exception as ex:
             logging.info(ex)
 
     def parse_contactPage(self, response):
         logging.info('PARSING CONTACT PAGE. {}'.format(response.url))
-        parsed_uri = urlparse('http://stackoverflow.com/questions/1234567/blah-blah-blah-blah')
-        domain = '{uri.scheme}://{uri.netloc}/'.format(uri=parsed_uri)
+        # parsed_uri = urlparse('http://stackoverflow.com/questions/1234567/blah-blah-blah-blah')
+        # domain = '{uri.scheme}://{uri.netloc}/'.format(uri=parsed_uri)
         item = DynamicItem(url=response.url)
         item['article_name'] = response.meta['articleName']
         # item['item_title'] = response.meta['itemTitle']
